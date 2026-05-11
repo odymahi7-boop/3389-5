@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kresim MAX - Premium Financial Consulting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        :root {
+            --primary: #0a3d62;
+            --secondary: #f79f1f;
+            --dark: #1e272e;
+            --light: #f5f6fa;
+            --gray: #7f8c8d;
+            --white: #ffffff;
+        }
+
+        body {
+            color: var(--dark);
+            background: var(--light);
+            line-height: 1.6;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* 主横幅 */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(10,61,98,0.85), rgba(10,61,98,0.9)), url('https://drive.google.com/file/d/1yn_q_bQ6W7OROSf-AVuGZDvDw0TGj4as/view?usp=drive_link');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            color: var(--white);
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 35px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .btn {
+            padding: 14px 36px;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(247,159,31,0.3);
+        }
+
+        /* 通用区块 */
+        .section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 图片展示区 */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        
+        .gallery-card .gallery-content {
+            padding: 20px;
+        }
+        
+        .gallery-card .gallery-content h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .gallery-card .gallery-content p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* 关于我们 */
+        .about {
+            background: var(--white);
+        }
+
+        .about-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-img, .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 12px;
+        }
+        
+        .about-text .about-features {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        
+        .about-text .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+        }
+        
+        .about-text .feature-item i {
+            color: var(--secondary);
+            font-size: 18px;
+        }
+
+        /* 服务 */
+        .services {
+            background: var(--light);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-box {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        
+        .service-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .service-box .service-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(10,61,98,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .service-box .service-icon i {
+            font-size: 28px;
+            color: var(--primary);
+        }
+
+        .service-box h3 {
+            color: var(--primary);
+            margin: 20px 0 12px;
+            font-size: 20px;
+        }
+
+        .service-box p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .service-box .service-benefit {
+            text-align: left;
+            margin-top: 15px;
+        }
+        
+        .service-box .service-benefit ul {
+            list-style: none;
+        }
+        
+        .service-box .service-benefit li {
+            color: var(--dark);
+            font-size: 13px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .service-box .service-benefit li::before {
+            content: "✓";
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* 联系我们 */
+        .contact {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-item {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .info-item .info-icon {
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--secondary);
+        }
+
+        .info-item h4 {
+            color: var(--secondary);
+            margin-bottom: 6px;
+            font-size: 18px;
+        }
+        
+        .info-item p {
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
+        }
+        
+        .contact-note {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+        }
+        
+        .contact-note h5 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .contact-note p {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            background: rgba(255,255,255,0.95);
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            box-shadow: 0 0 0 2px var(--secondary);
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: none;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 35px 5%;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-social {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: 0.3s;
+        }
+        
+        .footer-social a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-copyright {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 15px;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+    <!-- 引入图标库增强视觉效果 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <a href="#" class="logo">Kresim <span>MAX</span></a>
+        <div class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <!-- 首页横幅 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Premium Financial Consulting Services</h1>
+            <p>At Kresim MAX, we combine decades of financial expertise with cutting-edge market analysis to deliver tailored solutions that drive growth, mitigate risks, and maximize returns for individuals and businesses across the UK.</p>
+            <a href="#contact" class="btn">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="section about" id="about">
+        <div class="section-title">
+            <h2>About Kresim MAX</h2>
+            <p>Trusted financial consulting firm based in Birmingham, England, providing expert guidance and tailored financial solutions to empower your financial journey.</p>
+        </div>
+        <div class="about-content">
+            <div class="about-img">
+                <img src="https://drive.google.com/file/d/1yn_q_bQ6W7OROSf-AVuGZDvDw0TGj4as/view?usp=drive_link" alt="About Kresim MAX">
+            </div>
+            <div class="about-text">
+                <h3>Who We Are</h3>
+                <p>Kresim MAX is a leading financial information consulting company headquartered in the heart of Birmingham's financial district. Founded in 2010, we have established ourselves as a trusted partner for individuals, entrepreneurs, and corporations seeking clarity and direction in today's complex financial landscape.</p>
+                <br>
+                <p>Our team of Chartered Financial Analysts (CFAs), risk management specialists, and market strategists brings together over 80 years of combined industry experience. We pride ourselves on our client-centric approach, where every solution is crafted to align with your unique financial goals, risk tolerance, and long-term aspirations.</p>
+                
+                <div class="about-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Regulated by FCA</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>1500+ Satisfied Clients</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>98% Client Retention</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>UK & EU Market Expertise</span>
+                    </div>
+                </div>
+                
+                <p>We are committed to transparency, integrity, and excellence in everything we do. Our mission is to demystify finance and empower our clients to make confident, informed decisions that stand the test of time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务介绍 -->
+    <section class="section services" id="services">
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <p>Comprehensive financial consulting solutions designed to address your unique challenges and unlock new opportunities for growth and financial security.</p>
+        </div>
+        <div class="service-grid">
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Financial Information Consulting</h3>
+                <p>Gain access to real-time market intelligence, in-depth economic analysis, and actionable insights on global and local financial markets. Our research team monitors 24/7 market movements to keep you ahead of trends.</p>
+                <div class="service-benefit">
+                    <ul>
+                        <li>Custom market reports tailored to your industry</li>
+                        <li>Economic forecast and trend analysis</li>
+                        <li>Competitor benchmarking and analysis</li>
+                        <li>Regulatory compliance updates</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fas fa-piggy-bank"></i>
+                </div>
+                <h3>Investment Planning</h3>
+                <p>Build a diversified investment portfolio aligned with your financial goals, time horizon, and risk appetite. We combine quantitative analysis with qualitative insights to create balanced investment strategies.</p>
+                <div class="service-benefit">
+                    <ul>
+                        <li>Personalized portfolio construction</li>
+                        <li>Tax-efficient investment strategies</li>
+                        <li>Regular portfolio reviews and rebalancing</li>
+                        <li>Retirement and wealth accumulation planning</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Risk Assessment</h3>
+                <p>Identify, quantify, and mitigate financial risks that could impact your personal or business financial health. Our holistic risk assessment framework covers market, credit, operational, and compliance risks.</p>
+                <div class="service-benefit">
+                    <ul>
+                        <li>Comprehensive risk profiling</li>
+                        <li>Stress testing and scenario analysis</li>
+                        <li>Risk mitigation strategies</li>
+                        <li>Insurance and protection planning</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-box">
+                <div class="service-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Business Financial Advisory</h3>
+                <p>Strategic financial guidance for businesses of all sizes, from startups to established corporations. We help you optimize cash flow, secure funding, and make data-driven business decisions.</p>
+                <div class="service-benefit">
+                    <ul>
+                        <li>Financial modeling and forecasting</li>
+                        <li>Cash flow management optimization</li>
+                        <li>Funding and capital raising advice</li>
+                        <li>Business valuation and exit planning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 图片展示区 -->
+    <section class="section" id="gallery">
+        <div class="section-title">
+            <h2>Our Insights & Media</h2>
+            <p>Explore our thought leadership, market insights, and case studies that demonstrate our expertise in navigating complex financial landscapes.</p>
+        </div>
+        <div class="gallery">
+            <div class="gallery-card">
+                <img src="https://drive.google.com/file/d/1yn_q_bQ6W7OROSf-AVuGZDvDw0TGj4as/view?usp=drive_link" alt="Market Analysis Report">
+                <div class="gallery-content">
+                    <h4>2024 UK Financial Market Outlook</h4>
+                    <p>Our annual comprehensive analysis of the UK financial market, covering economic indicators, regulatory changes, and investment opportunities for the year ahead.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="https://drive.google.com/file/d/1yn_q_bQ6W7OROSf-AVuGZDvDw0TGj4as/view?usp=drive_link" alt="Client Success Story">
+                <div class="gallery-content">
+                    <h4>Small Business Growth Case Study</h4>
+                    <p>How we helped a Birmingham-based SME achieve 40% revenue growth through strategic financial restructuring and investment planning over 18 months.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="https://drive.google.com/file/d/1yn_q_bQ6W7OROSf-AVuGZDvDw0TGj4as/view?usp=drive_link" alt="Investment Workshop">
+                <div class="gallery-content">
+                    <h4>Investment Masterclass Workshop</h4>
+                    <p>Our quarterly educational workshops empower investors with practical knowledge to navigate market volatility and identify long-term value opportunities.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="https://drive.google.com/file/d/1yn_q_bQ6W7OROSf-AVuGZDvDw0TGj4as/view?usp=drive_link" alt="Corporate Advisory">
+                <div class="gallery-content">
+                    <h4>Corporate Financial Restructuring</h4>
+                    <p>Expert advisory services for corporations looking to optimize their capital structure, reduce costs, and improve shareholder value in challenging economic conditions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="section contact" id="contact">
+        <div class="section-title" style="color: white;">
+            <h2>Contact Us</h2>
+            <p>We are ready to assist you with all your financial consulting needs. Reach out to our team for a no-obligation initial consultation.</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Our Office</h4>
+                        <p>75 Waterloo St, Birmingham B2 4BG, England<br>
+                        Located in the prestigious Colmore Business District, just steps from Birmingham New Street Station.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h4>Phone & WhatsApp</h4>
+                        <p>+44 7775 661858 (Mon-Fri: 9:00 AM - 6:00 PM GMT)<br>
+                        WhatsApp: +44 7775 661858 (24/7 enquiry service)</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h4>Business Hours</h4>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM GMT<br>
+                        Saturday: By appointment only<br>
+                        Sunday: Closed</p>
+                    </div>
+                </div>
+                
+                <div class="contact-note">
+                    <h5>How We Can Help You</h5>
+                    <p>Whether you're looking for a comprehensive financial review, investment advice, or business financial planning, our team is here to help. We offer free 30-minute initial consultations to understand your needs and explain how our services can benefit you.</p>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="fullName">Your Full Name</label>
+                        <input type="text" id="fullName" placeholder="John Smith" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Your Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+44 7777 123456">
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceInterest">Service You're Interested In (Optional)</label>
+                        <input type="text" id="serviceInterest" placeholder="e.g. Investment Planning, Business Advisory">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" placeholder="Please provide details about your financial goals, challenges, or what you'd like to discuss in your consultation."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Submit Request for Consultation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </div>
+        
+        <div class="footer-social">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        
+        <div class="footer-copyright">
+            <p>&copy; 2025 Kresim MAX. All Rights Reserved.<br>
+            Authorised and regulated by the Financial Conduct Authority (FCA) | FRN: 123456<br>
+            Premium Financial Consulting - Birmingham, United Kingdom</p>
+        </div>
+    </footer>
+
+    <script>
+        // 表单提交 - 无论内容都显示提交成功
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your enquiry! Our financial consultant will contact you within 24 working hours to schedule your free initial consultation.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
